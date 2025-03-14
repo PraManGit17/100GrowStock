@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+* {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+
+}
+
+
+/* html,
+  body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(to right, #eaf1e6, #ffe495, #ffe96e);
+  
+}
+
+ */
+ html,
+ body {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   background: linear-gradient(to right, rgba(218, 254, 192, 0.2), #d7f2c9cc, rgba(204, 250, 182, 0.2));
+   backdrop-filter: blur(20px);
+ }
+ 
