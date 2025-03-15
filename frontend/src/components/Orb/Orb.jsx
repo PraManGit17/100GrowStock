@@ -32,6 +32,7 @@ function Orb() {
         );
         filter: blur(400px);
         animation: ${moveOrb} 10s alternate linear infinite;
+        z-index: 1;
     `;
 
     return <OrbStyled></OrbStyled>;
