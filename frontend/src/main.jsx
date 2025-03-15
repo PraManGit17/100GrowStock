@@ -9,11 +9,13 @@ import {
     RouterProvider,
 } from 'react-router-dom';
 import Landing from './pages/Landing/Landing.jsx';
+import Watchlist from './pages/Watchlist/Watchlist.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
             <Route path="" element={<Landing />} />
+            <Route path="/watchlist" element={<Watchlist />} />
         </Route>
     )
 );

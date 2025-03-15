@@ -18,7 +18,7 @@ const Header = () => {
         },
         {
             name: 'WATCHLIST',
-            link: '',
+            link: '/watchlist',
         },
         {
             name: 'DISCOVER',
@@ -30,8 +30,8 @@ const Header = () => {
         setIsOpen(false);
     }, [location]);
     return (
-        <div className="mx-auto md:w-auto w-[90%] md:px-8">
-            <div className="flex justify-between items-center p-3 rounded-2xl mt-4 cursor-pointer border-2 border-white">
+        <div className="md:mx-auto md:w-auto w-[90%] md:px-8 mx-auto">
+            <div className="flex justify-between items-center p-3 rounded-2xl mt-4 cursor-pointer border-2 border-white bg-gray-200 shadow-inner">
                 <div className="text-lg font-bold">GrowStock</div>
                 <div id="navLinks" className="w-3/5">
                     <ul
@@ -47,7 +47,16 @@ const Header = () => {
                                 key={link.name}
                                 className="text-gray-600 font-bold"
                             >
-                                <NavLink to={link.link}>{link.name}</NavLink>
+                                <NavLink
+                                    to={link.link}
+                                    style={({ isActive }) => ({
+                                        textDecoration: isActive
+                                            ? 'underline'
+                                            : 'none',
+                                    })}
+                                >
+                                    {link.name}
+                                </NavLink>
                             </li>
                         ))}
                     </ul>

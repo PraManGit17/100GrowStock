@@ -5,7 +5,7 @@
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal; */
-    background-color: #ddddda;
+    /* background-color: #ddddda; */
 }
 
 /* html,
@@ -33,5 +33,9 @@ body {
 } */
 
 #linkList {
-    font-family: 'Montserrat', Courier, monospace;
+    font-family: 'Inter', Courier, monospace;
+}
+
+#title {
+    font-family: 'Inter', Courier, monospace;
 }
