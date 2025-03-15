@@ -2,7 +2,7 @@ import React from 'react';
 import Landing from './pages/Landing/Landing';
 import Header from './components/Navbar/Header';
 import { Outlet } from 'react-router-dom';
-import Orb from '../../../Frontend/Projects/MoneyMinder/frontend/src/Components/Orb/Orb';
+//  Orb from '../../../Frontend/Projects/MoneyMinder/frontend/src/Components/Orb/Orb';
 
 function App() {
     return (
