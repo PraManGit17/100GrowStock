@@ -24,7 +24,7 @@
    margin: 0;
    padding: 0;
    box-sizing: border-box;
-   background: linear-gradient(to right, rgba(218, 254, 192, 0.2), #d7f2c9cc, rgba(204, 250, 182, 0.2));
+   background: linear-gradient(to right, rgba(229, 249, 215, 0.2), #f8fff5cc, rgba(235, 255, 226, 0.2));
    backdrop-filter: blur(20px);
  }
  
