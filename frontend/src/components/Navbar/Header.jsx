@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink,Link, useLocation } from 'react-router-dom';
 import {
     ClockCounterClockwise,
     List,
@@ -7,6 +7,7 @@ import {
     User,
 } from '@phosphor-icons/react';
 import { useState } from 'react';
+import Signup from '../../pages/Signup/Signup';
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
@@ -24,6 +25,7 @@ const Header = () => {
             name: 'DISCOVER',
             link: '',
         },
+
     ];
 
     useEffect(() => {
@@ -76,9 +78,9 @@ const Header = () => {
                         <MagnifyingGlass size={24} />
                         <ClockCounterClockwise size={24} />
                     </div>
-                    <div id="profile" className="px-2">
+                    <NavLink to="/signup" id="profile" className="px-2"  >
                         <User size={24} />
-                    </div>
+                    </NavLink>
                 </div>
             </div>
         </div>

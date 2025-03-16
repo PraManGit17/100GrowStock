@@ -3,7 +3,7 @@ import Landing from './pages/Landing/Landing';
 import Header from './components/Navbar/Header';
 import { Outlet } from 'react-router-dom';
 import Orb from "./components/Orb/Orb.jsx"
-
+import Dashboard from './pages/Dashboard';
 function App() {
     return (
         <>
@@ -12,6 +12,7 @@ function App() {
                 <Header />
                 <Orb />
                 <Outlet />
+               {/* <Dashboard/> */}
             </div>
         </>
     );
