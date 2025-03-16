@@ -1,17 +1,20 @@
 import React from 'react';
 import Landing from './pages/Landing/Landing';
-import Header from './components/Navbar/Header';
+import Navbar from './components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-//  Orb from '../../../Frontend/Projects/MoneyMinder/frontend/src/Components/Orb/Orb';
-
+import Orb from './components/Orb/Orb';
+// import StockCard from './components/StockCard/StockCard';
 function App() {
     return (
         <>
-            <div className="px-4 backdrop-filter backdrop-blur-lg bg-opacity-30 border-4 shadow-inner border-gray-200 w-[96vw] md:mx-auto ml-2 rounded-xl">
-                <Header />
-                <Orb />
+            {/* <div className="px-4 backdrop-filter backdrop-blur-lg bg-opacity-30 border-4 shadow-inner border-gray-200 w-[95vw] md:mx-auto ml-2 rounded-xl overflow-x-hidden h-screen md:w-auto"> */}
+            <div className="md:px-0 px-4">
+                <Navbar />
+                {/* <Orb /> */}
                 <Outlet />
+                {/* <StockCard /> */}
             </div>
+            {/* </div> */}
         </>
     );
 }

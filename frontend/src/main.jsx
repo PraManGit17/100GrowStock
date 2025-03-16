@@ -10,12 +10,16 @@ import {
 } from 'react-router-dom';
 import Landing from './pages/Landing/Landing.jsx';
 import Watchlist from './pages/Watchlist/Watchlist.jsx';
+import Search from './pages/Search/Search.jsx';
+import StockCard from './components/StockCard/StockCard.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
             <Route path="" element={<Landing />} />
             <Route path="/watchlist" element={<Watchlist />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/stock/:stockId" element={<StockCard />} />
         </Route>
     )
 );
