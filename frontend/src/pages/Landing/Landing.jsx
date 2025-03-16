@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/Navbar/Header';
+import Header from '../../components/Navbar/Navbar';
 import StockCard from '../../components/StockCard/StockCard';
 import CompanyInfo from '../../components/CompanyInfo/Companyinfo';
 
