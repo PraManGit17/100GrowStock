@@ -13,7 +13,8 @@ import Watchlist from './pages/Watchlist/Watchlist.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Signup from './pages/Signup/Signup.jsx';
 import Login from './pages/login.jsx/Login.jsx';
-
+import Search from './pages/Search/Search.jsx';
+import StockCard from './components/StockCard/StockCard.jsx';
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<App />}>
@@ -22,6 +23,8 @@ const router = createBrowserRouter(
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/search" element={<Search/>} />
+            <Route path="/stock/:stockId" element={<StockCard />} />
         </Route>
     )
 );
