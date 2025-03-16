@@ -1,9 +1,5 @@
 import React, { useEffect } from 'react';
-<<<<<<< HEAD:frontend/src/components/Navbar/Header.jsx
-import { NavLink,Link, useLocation } from 'react-router-dom';
-=======
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
->>>>>>> 69922dd9c8a3e09ebde9b0c6b8951db95f5f1867:frontend/src/components/Navbar/Navbar.jsx
 import {
     ClockCounterClockwise,
     List,
@@ -11,14 +7,9 @@ import {
     User,
 } from '@phosphor-icons/react';
 import { useState } from 'react';
-<<<<<<< HEAD:frontend/src/components/Navbar/Header.jsx
-import Signup from '../../pages/Signup/Signup';
-const Header = () => {
-=======
 
 const Navbar = () => {
     const navigate = useNavigate();
->>>>>>> 69922dd9c8a3e09ebde9b0c6b8951db95f5f1867:frontend/src/components/Navbar/Navbar.jsx
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
     let Links = [

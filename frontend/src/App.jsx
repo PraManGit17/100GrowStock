@@ -2,13 +2,8 @@ import React from 'react';
 import Landing from './pages/Landing/Landing';
 import Navbar from './components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-<<<<<<< HEAD
 import Orb from "./components/Orb/Orb.jsx"
 import Dashboard from './pages/Dashboard';
-=======
-import Orb from './components/Orb/Orb';
-
->>>>>>> 69922dd9c8a3e09ebde9b0c6b8951db95f5f1867
 function App() {
     return (
         <>
