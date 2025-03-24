@@ -8,7 +8,7 @@ const Landing = () => {
         <div>
             {/* <Header /> */}
             <div className="flex">
-                {/* <StockCard /> */}
+                {/* <StockCard /> }
                 {/* <CompanyInfo /> */}
             </div>
         </div>

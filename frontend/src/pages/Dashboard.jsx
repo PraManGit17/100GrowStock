@@ -17,6 +17,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts"
+import './Dashboard.css';
 
 // Sample data for charts
 const profitLossData = [
@@ -130,14 +131,18 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState("overview")
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-black border-2">
       {/* Sidebar */}
-     
+
+
 
       {/* Main Content */}
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col items-center bg-black/90 py-3">
+
+        <hr className='w-full bg-white border-white border-1'></hr>
         {/* Header */}
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-white px-6">
+        <header className="sticky top-0 z-30 flex w-[95%] h-16  items-center justify-center gap-4  rounded-2xl px-6 mt-6
+                           backdrop-blur-3xl shadow-white border-white border-2">
           <button
             onClick={() => setIsSidebarOpen(true)}
             className="rounded-md p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 md:hidden"
@@ -176,7 +181,11 @@ function Dashboard() {
                 />
               </div>
             </form>
+
+
           </div>
+
+
           <div className="flex items-center gap-2">
             <button className="hidden items-center gap-2 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 md:flex">
               <svg
@@ -249,14 +258,16 @@ function Dashboard() {
           </div>
         </header>
 
+
+
         {/* Main Dashboard */}
         <main className="flex-1 overflow-auto p-6">
           <div className="flex flex-col gap-6">
             {/* Dashboard Header */}
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <h1 className="text-2xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-                <p className="text-gray-600">Welcome back, John. Here's an overview of your investments.</p>
+                <h1 className="text-2xl font-bold tracking-tight text-gray-200">Dashboard</h1>
+                <p className="text-white">Welcome back, John. Here's an overview of your investments.</p>
               </div>
               <div className="flex items-center gap-2">
                 <button className="flex items-center gap-2 rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50">
@@ -291,9 +302,9 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* Overview Cards */}
+            {/* Overview Cards
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
+              <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm id='card1' ">
                 <div className="flex items-center justify-between pb-2">
                   <p className="text-sm font-medium text-gray-500">Total Portfolio Value</p>
                   <svg
@@ -311,6 +322,9 @@ function Dashboard() {
                     />
                   </svg>
                 </div>
+
+
+
                 <div className="text-2xl font-bold text-gray-900">$45,231.89</div>
                 <div className="flex items-center text-sm text-green-600">
                   <svg
@@ -326,6 +340,7 @@ function Dashboard() {
                   <span className="ml-1 text-gray-500">from last month</span>
                 </div>
               </div>
+
               <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between pb-2">
                   <p className="text-sm font-medium text-gray-500">Monthly Returns</p>
@@ -359,6 +374,7 @@ function Dashboard() {
                   <span className="ml-1 text-gray-500">from last month</span>
                 </div>
               </div>
+
               <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between pb-2">
                   <p className="text-sm font-medium text-gray-500">YTD Performance</p>
@@ -377,6 +393,7 @@ function Dashboard() {
                     />
                   </svg>
                 </div>
+
                 <div className="text-2xl font-bold text-gray-900">+18.2%</div>
                 <div className="flex items-center text-sm text-green-600">
                   <svg
@@ -392,6 +409,7 @@ function Dashboard() {
                   <span className="ml-1 text-gray-500">from last year</span>
                 </div>
               </div>
+
               <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center justify-between pb-2">
                   <p className="text-sm font-medium text-gray-500">Risk Score</p>
@@ -415,48 +433,175 @@ function Dashboard() {
                   <span>65/100 risk points</span>
                 </div>
               </div>
+            </div> */}
+
+            {/* Overview Cards */}
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="card">
+                <div className="flex items-center justify-between pb-2">
+                  <p className="card-title">Total Portfolio Value</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+
+                <div className="card-value">$45,231.89</div>
+                <div className="card-change">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-1 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                  <span>+20.1%</span>
+                  <span className="ml-1 text-gray-400">from last month</span>
+                </div>
+              </div>
+
+              <div className="card">
+                <div className="flex items-center justify-between pb-2">
+                  <p className="card-title">Monthly Returns</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                    />
+                  </svg>
+                </div>
+                <div className="card-value">$2,350.45</div>
+                <div className="card-change">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-1 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                  <span>+5.2%</span>
+                  <span className="ml-1 text-gray-400">from last month</span>
+                </div>
+              </div>
+
+              <div className="card">
+                <div className="flex items-center justify-between pb-2">
+                  <p className="card-title">YTD Performance</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                    />
+                  </svg>
+                </div>
+                <div className="card-value">+18.2%</div>
+                <div className="card-change">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mr-1 h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                  </svg>
+                  <span>+2.5%</span>
+                  <span className="ml-1 text-gray-400">from last year</span>
+                </div>
+              </div>
+
+              <div className="card">
+                <div className="flex items-center justify-between pb-2">
+                  <p className="card-title">Risk Score</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="card-value">Moderate</div>
+                <div className="flex items-center text-sm text-gray-400">
+                  <span>65/100 risk points</span>
+                </div>
+              </div>
             </div>
 
+
             {/* Charts Section */}
-            <div className="space-y-4">
-              <div className="flex border-b border-gray-200">
+            <div className="space-y-4 p-5 border-2 border-white rounded-2xl">
+              <div className="flex justify-center gap-2 border-b border-gray-200">
                 <button
                   onClick={() => setActiveTab("overview")}
-                  className={`px-4 py-2 text-sm font-medium ${
-                    activeTab === "overview"
-                      ? "border-b-2 border-blue-600 text-blue-600"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
+                  className={`px-5 py-3 text-sm font-medium ${activeTab === "overview"
+                    ? "border-b-2 border-blue-600 text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                    } cards`}
                 >
                   Overview
                 </button>
                 <button
                   onClick={() => setActiveTab("performance")}
-                  className={`px-4 py-2 text-sm font-medium ${
-                    activeTab === "performance"
-                      ? "border-b-2 border-blue-600 text-blue-600"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
+                  className={`px-5 py-3 text-sm font-medium ${activeTab === "performance"
+                    ? "border-b-2 border-blue-600 text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                    } cards`}
                 >
                   Performance
                 </button>
                 <button
                   onClick={() => setActiveTab("allocation")}
-                  className={`px-4 py-2 text-sm font-medium ${
-                    activeTab === "allocation"
-                      ? "border-b-2 border-blue-600 text-blue-600"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
+                  className={`px-5 py-3 text-sm font-medium  ${activeTab === "allocation"
+                    ? "border-b-2 border-blue-600 text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                    } cards`}
                 >
                   Allocation
                 </button>
                 <button
                   onClick={() => setActiveTab("history")}
-                  className={`px-4 py-2 text-sm font-medium ${
-                    activeTab === "history"
-                      ? "border-b-2 border-blue-600 text-blue-600"
-                      : "text-gray-500 hover:text-gray-700"
-                  }`}
+                  className={`px-5 py-3 text-sm font-medium  ${activeTab === "history"
+                    ? "border-b-2 border-blue-600 text-blue-600"
+                    : "text-gray-500 hover:text-gray-700"
+                    } cards`}
                 >
                   History
                 </button>
@@ -466,63 +611,62 @@ function Dashboard() {
                 <div className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                     {/* Profit/Loss Chart */}
-                    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:col-span-4">
+
+
+                    <div className="glass-black p-4 lg:col-span-4">
                       <div>
-                        <h3 className="text-base font-semibold text-gray-900">Profit & Loss</h3>
-                        <p className="text-sm text-gray-500">Monthly profit and loss overview</p>
+                        <h3 className="text-base font-semibold text-white">Profit & Loss</h3>
+                        <p className="text-sm text-gray-400">Monthly profit and loss overview</p>
                       </div>
                       <div className="h-[300px] pt-4">
                         <ResponsiveContainer width="100%" height="100%">
                           <LineChart
                             data={profitLossData}
-                            margin={{
-                              top: 5,
-                              right: 10,
-                              left: 10,
-                              bottom: 0,
-                            }}
+                            margin={{ top: 5, right: 10, left: 10, bottom: 0 }}
                           >
                             <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                            <XAxis dataKey="name" />
-                            <YAxis />
+                            <XAxis dataKey="name" stroke="white" />
+                            <YAxis stroke="white" />
                             <Tooltip
                               contentStyle={{
-                                backgroundColor: "rgba(255, 255, 255, 0.8)",
+                                backgroundColor: "rgba(0, 0, 0, 0.8)",
                                 borderRadius: "8px",
-                                border: "1px solid #e2e8f0",
+                                border: "1px solid #333",
+                                color: "white",
                               }}
                             />
                             <Legend />
-                            <Line
-                              type="monotone"
-                              dataKey="profit"
-                              stroke="#10b981"
-                              strokeWidth={2}
-                              dot={{ r: 0 }}
-                              activeDot={{ r: 6 }}
-                            />
-                            <Line
-                              type="monotone"
-                              dataKey="loss"
-                              stroke="#ef4444"
-                              strokeWidth={2}
-                              dot={{ r: 0 }}
-                              activeDot={{ r: 6 }}
-                            />
+                            {/* SVG Filters for Box Shadows */}
+                            <defs>
+                              <filter id="glow-green">
+                                <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#10b981" floodOpacity="0.7" />
+                              </filter>
+                              <filter id="glow-red">
+                                <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#ef4444" floodOpacity="0.7" />
+                              </filter>
+                            </defs>
+                            <Line type="monotone" dataKey="profit" stroke="#10b981" strokeWidth={3} dot={{ r: 0 }} activeDot={{ r: 6 }} style={{ filter: "url(#glow-green)" }} />
+                            <Line type="monotone" dataKey="loss" stroke="#ef4444" strokeWidth={3} dot={{ r: 0 }} activeDot={{ r: 6 }} style={{ filter: "url(#glow-red)" }} />
                           </LineChart>
                         </ResponsiveContainer>
                       </div>
                     </div>
 
+
+
+
                     {/* Portfolio Diversity */}
-                    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:col-span-3">
+
+
+                    <div className="rounded-lg border p-4 shadow-sm lg:col-span-3 hglassmorphism">
                       <div>
-                        <h3 className="text-base font-semibold text-gray-900">Portfolio Diversity</h3>
-                        <p className="text-sm text-gray-500">Asset allocation breakdown</p>
+                        <h3 className="text-base font-semibold">Portfolio Diversity</h3>
+                        <p className="text-sm">Asset allocation breakdown</p>
                       </div>
+
                       <div className="h-[300px] pt-4">
                         <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
+                          <PieChart >
                             <Pie
                               data={portfolioData}
                               cx="50%"
@@ -533,6 +677,7 @@ function Dashboard() {
                               dataKey="value"
                               label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
                               labelLine={false}
+
                             >
                               {portfolioData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={entry.color} />
@@ -544,7 +689,9 @@ function Dashboard() {
                                 backgroundColor: "rgba(255, 255, 255, 0.8)",
                                 borderRadius: "8px",
                                 border: "1px solid #e2e8f0",
+
                               }}
+
                             />
                           </PieChart>
                         </ResponsiveContainer>
@@ -552,12 +699,14 @@ function Dashboard() {
                     </div>
                   </div>
 
+
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                     {/* Performance Comparison */}
-                    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:col-span-3">
+
+                    <div className="rounded-lg w-[100%] border p-4 shadow-sm lg:col-span-3 white-glassmorphism">
                       <div>
-                        <h3 className="text-base font-semibold text-gray-900">Performance Comparison</h3>
-                        <p className="text-sm text-gray-500">Current vs Previous Period</p>
+                        <h3 className="text-base font-semibold text-gray-200">Performance Comparison</h3>
+                        <p className="text-sm text-white">Current vs Previous Period</p>
                       </div>
                       <div className="h-[300px] pt-4">
                         <ResponsiveContainer width="100%" height="100%">
@@ -589,10 +738,10 @@ function Dashboard() {
                     </div>
 
                     {/* Cumulative Returns */}
-                    <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:col-span-4">
+                    <div className="glassmorphism p-4 shadow-lg lg:col-span-4">
                       <div>
-                        <h3 className="text-base font-semibold text-gray-900">Cumulative Returns</h3>
-                        <p className="text-sm text-gray-500">Year-to-date growth</p>
+                        <h3 className="text-base font-semibold text-white">Cumulative Returns</h3>
+                        <p className="text-sm text-white">Year-to-date growth</p>
                       </div>
                       <div className="h-[300px] pt-4">
                         <ResponsiveContainer width="100%" height="100%">
@@ -605,34 +754,37 @@ function Dashboard() {
                               bottom: 0,
                             }}
                           >
-                            <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                            <XAxis dataKey="name" />
-                            <YAxis />
+                            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255, 255, 255, 0.2)" />
+                            <XAxis dataKey="name" stroke="rgba(255, 255, 255, 0.7)" />
+                            <YAxis stroke="rgba(255, 255, 255, 0.7)" />
                             <Tooltip
                               formatter={(value) => [`$${value}`, "Returns"]}
                               contentStyle={{
-                                backgroundColor: "rgba(255, 255, 255, 0.8)",
+                                backgroundColor: "rgba(255, 255, 255, 0.1)",
                                 borderRadius: "8px",
-                                border: "1px solid #e2e8f0",
+                                border: "1px solid rgba(255, 255, 255, 0.3)",
+                                backdropFilter: "blur(10px)",
+                                color: "white",
                               }}
                             />
                             <Area
                               type="monotone"
                               dataKey="returns"
-                              stroke="#8884d8"
+                              stroke="#ffffff"
                               fill="url(#colorReturns)"
                               strokeWidth={2}
                             />
                             <defs>
                               <linearGradient id="colorReturns" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                                <stop offset="95%" stopColor="#8884d8" stopOpacity={0.1} />
+                                <stop offset="5%" stopColor="#ffffff" stopOpacity={0.8} />
+                                <stop offset="95%" stopColor="#ffffff" stopOpacity={0.1} />
                               </linearGradient>
                             </defs>
                           </AreaChart>
                         </ResponsiveContainer>
                       </div>
                     </div>
+
                   </div>
                 </div>
               )}
@@ -640,8 +792,8 @@ function Dashboard() {
               {activeTab === "performance" && (
                 <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                   <div>
-                    <h3 className="text-base font-semibold text-gray-900">Performance Analysis</h3>
-                    <p className="text-sm text-gray-500">Detailed performance metrics</p>
+                    <h3 className="text-base font-semibold text-white">Performance Analysis</h3>
+                    <p className="text-sm text-gray-200">Detailed performance metrics</p>
                   </div>
                   <div className="pt-4">
                     <p>Performance content will be displayed here.</p>
@@ -653,7 +805,7 @@ function Dashboard() {
                 <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
                   <div>
                     <h3 className="text-base font-semibold text-gray-900">Asset Allocation</h3>
-                    <p className="text-sm text-gray-500">Current allocation and recommendations</p>
+                    <p className="text-sm text-white">Current allocation and recommendations</p>
                   </div>
                   <div className="pt-4">
                     <p>Allocation content will be displayed here.</p>
@@ -677,25 +829,26 @@ function Dashboard() {
             {/* Investment Advice */}
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold tracking-tight text-gray-900">Investment Advice</h2>
+                <h2 className="text-xl font-bold tracking-tight text-white">Investment Advice</h2>
                 <button className="rounded-md border border-gray-300 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50">
                   View All
                 </button>
               </div>
+
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 {adviceData.map((advice, index) => (
-                  <div key={index} className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+                  <div key={index} className="glassmorphism-card overflow-hidden shadow-lg">
                     <div className="flex items-center gap-3 p-4 pb-2">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-200 text-blue-700">
                         {advice.icon}
                       </div>
-                      <h3 className="text-base font-semibold text-gray-900">{advice.title}</h3>
+                      <h3 className="text-base font-semibold text-white">{advice.title}</h3>
                     </div>
                     <div className="px-4 pb-4">
-                      <p className="text-sm text-gray-600">{advice.description}</p>
+                      <p className="text-sm text-gray-300">{advice.description}</p>
                     </div>
-                    <div className="border-t bg-gray-50 p-3">
-                      <button className="flex h-8 w-full items-center justify-start gap-1 rounded-md px-2 text-sm font-medium text-gray-700 hover:bg-gray-100">
+                    <div className="glassmorphism-footer p-3">
+                      <button className="glassmorphism-button flex h-8 w-full items-center justify-start gap-1 rounded-md px-2 text-sm font-medium">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4"
@@ -716,6 +869,7 @@ function Dashboard() {
                   </div>
                 ))}
               </div>
+
             </div>
           </div>
         </main>
@@ -725,4 +879,3 @@ function Dashboard() {
 }
 
 export default Dashboard
-
