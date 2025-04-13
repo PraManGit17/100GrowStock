@@ -2,19 +2,45 @@ import { MagnifyingGlass } from '@phosphor-icons/react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import stockData from './stocks.json';
-
+import axios from 'axios';
 function Search() {
     const [searchInput, setSearchInput] = useState('');
+    const [keyword, setKeyword] = useState('');
     const [filteredData, setFilteredData] = useState(stockData);
     const navigate = useNavigate();
 
+    const token = import.meta.env.VITE_TEST_TOKEN;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    // console.log(token);
+
+    const fetchData = async (query) => {
+        try {
+            const response = await axios.get(
+                `${backendUrl}/search/?keyword=${query}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'ngrok-skip-browser-warning': '69420',
+                    },
+                }
+            );
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error.message);
+        }
+    };
+
     useEffect(() => {
-        const results = stockData.filter(
-            (stock) =>
-                stock.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-                stock.ticker.toLowerCase().includes(searchInput.toLowerCase())
-        );
-        setFilteredData(results);
+        // const results = stockData.filter(
+        //     (stock) =>
+        //         stock.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+        //         stock.ticker.toLowerCase().includes(searchInput.toLowerCase())
+        // );
+        // setFilteredData(results);
+        setKeyword(searchInput);
+        console.log(keyword);
+        let data = fetchData(keyword);
+        console.log(data);
     }, [searchInput]);
 
     const handleStockClick = (stock) => {
