@@ -83,8 +83,8 @@ function Search() {
                                 {filteredData.map((stock) => (
                                     <div
                                         key={stock.symbol}
-                                        className="p-4 rounded-lg flex items-center md:w-[22%] w-full transition duration-300 cursor-pointer hover:border-black border-gray-200 ease-in-out 
-                                               backdrop-filter backdrop-blur-lg bg-white/50 shadow-lg border bg-transparents"
+                                        className="p-4 rounded-lg flex items-center md:w-[22%] w-full transition-all duration-200 cursor-pointer hover:border-black hover:bg-white hover:text-black border-gray-200 ease-in-out 
+                                               backdrop-filter backdrop-blur-lg bg-black shadow-lg border bg-transparent"
                                         onClick={() => handleStockClick(stock)}
                                     >
                                         {/* <img
@@ -100,7 +100,8 @@ function Search() {
                                                 {stock.exchange} - {stock.index}
                                             </p>
                                             <p className="text-gray-700 font-bold">
-                                                ${stock.current_price}
+                                                {stock.currency}
+                                                {stock.current_price}
                                             </p>
                                         </div>
                                     </div>
