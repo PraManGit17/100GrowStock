@@ -161,7 +161,8 @@ const StockCard = ({ fetchData = null }) => {
                             className={`flex items-center ${changeColor} mb-6`}
                         >
                             <span className="text-xl font-medium">
-                                ${currentstockData?.change} (
+                                {currency}
+                                {currentstockData?.change} (
                                 {currentstockData?.percent_change}%)
                             </span>
                             <span className="ml-2 text-gray-500">

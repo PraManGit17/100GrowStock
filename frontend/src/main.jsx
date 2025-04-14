@@ -16,6 +16,8 @@ import Login from './pages/login.jsx/Login.jsx';
 import Search from './pages/Search/Search.jsx';
 import StockCard from './components/StockCard/StockCard.jsx';
 import Home from './pages/Home/Home.jsx';
+import Portfolio from './pages/Portfolio/Portfolio.jsx';
+import Discover from './pages/Discover/Discover.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,10 +29,12 @@ const router = createBrowserRouter(
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
+                <Route path="/portfolio" element={<Portfolio />} />
                 <Route
                     path="/stock/:currency/:stockId"
                     element={<StockCard />}
                 />
+                <Route path="/discover" element={<Discover />} />
             </Route>
             <Route path="/Home" element={<Home />} />
         </Route>
