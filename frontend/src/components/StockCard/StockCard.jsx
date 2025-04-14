@@ -8,47 +8,31 @@ import {
     Lightbulb,
     ArrowLeft,
 } from '@phosphor-icons/react';
+import axios from 'axios';
 
-const StockCard = ({ initialData = null, fetchData = null }) => {
+const StockCard = ({ fetchData = null }) => {
+    const [currentstockData, setCurrentStockData] = useState(null);
     const { stockId } = useParams();
+    const { currency } = useParams();
     const navigate = useNavigate();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const token = import.meta.env.VITE_TEST_TOKEN;
 
-    // State for stock data
-    const [stockData, setStockData] = useState({
-        ticker: initialData?.ticker || stockId || 'WIX',
-        exchange: initialData?.exchange || 'NASDAQ',
-        companyName: initialData?.name || initialData?.companyName || 'Wix',
-        description:
-            initialData?.description ||
-            'A cloud-based web development platform that lets users create and manage websites without coding expertise.',
-        currentValue:
-            initialData?.current_price || initialData?.currentValue || 163.43,
-        changeValue: initialData?.changeValue || 80.27,
-        changePercent: initialData?.changePercent || 96.52,
-        timeframe: initialData?.timeframe || 'Past Year',
-        chartData: initialData?.chartData || generateSampleData(),
-        insights: initialData?.insights || [
-            {
-                title: 'Wix Launches New E-commerce Platform',
-                icon: 'lightbulb',
-            },
-            {
-                title: 'Wix Expands Services with DeviantArt Acquisition',
-                icon: 'lightbulb',
-            },
-        ],
-        benchmarks: initialData?.benchmarks || {
-            growth: 36,
-            profit: 47,
-            value: 60,
-            health: 25,
-        },
-    });
+    const fetchStockData = async (symbol) => {
+        try {
+            const response = await axios.get(`${backendUrl}stock/${symbol}/`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'ngrok-skip-browser-warning': '69420',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error Fetching Stock Card Data: ', error);
+        }
+    };
 
-    const [selectedTimeframe, setSelectedTimeframe] = useState('1Y');
-
-    // Generate sample chart data
-    function generateSampleData() {
+    const generateSampleData = () => {
         const months = [
             'Oct',
             'Nov',
@@ -68,14 +52,7 @@ const StockCard = ({ initialData = null, fetchData = null }) => {
         let value = 80;
 
         for (let i = 0; i < months.length; i++) {
-            if (i < 5) {
-                value = value + Math.random() * 10 - 2;
-            } else if (i === 5) {
-                value = value + 30; // Big jump
-            } else {
-                value = value + Math.random() * 15 - 7;
-            }
-
+            value += i === 5 ? 30 : Math.random() * 10 - 5;
             data.push({
                 month: months[i],
                 value: Math.max(50, Math.min(200, value)),
@@ -83,199 +60,153 @@ const StockCard = ({ initialData = null, fetchData = null }) => {
         }
 
         return data;
-    }
+    };
 
-    // Load data on mount
+    const [selectedTimeframe, setSelectedTimeframe] = useState('1Y');
+
     useEffect(() => {
-        if (fetchData && stockId) {
-            fetchData(stockId).then((data) => {
-                if (data)
-                    setStockData((prevState) => ({
-                        ...prevState,
-                        ticker: data.ticker || stockId,
-                        exchange: data.exchange || prevState.exchange,
-                        companyName:
-                            data.name ||
-                            data.companyName ||
-                            prevState.companyName,
-                        description: data.description || prevState.description,
-                        currentValue:
-                            data.current_price ||
-                            data.currentValue ||
-                            prevState.currentValue,
-                    }));
-            });
-        }
-    }, [stockId, fetchData]);
+        const fetchStock = async () => {
+            try {
+                const result = await fetchStockData(stockId);
+                setCurrentStockData(result);
+            } catch (error) {
+                console.error(`Error Getting Data: ${error}`);
+            }
+        };
 
-    // Go back to search
+        if (stockId) {
+            fetchStock();
+        }
+    }, [stockId]);
+
     const handleBack = () => {
         navigate('/search');
     };
 
-    // Determine if change is positive or negative
-    const isPositive = stockData.changePercent > 0;
+    const isPositive = currentstockData?.percent_change > 0;
     const changeColor = isPositive ? 'text-green-500' : 'text-red-500';
 
+    if (!currentstockData) {
+        return (
+            <div className="text-center mt-20 text-gray-400">
+                Loading stock data...
+            </div>
+        );
+    }
+
     return (
-        <div className="md:px-8 md:w-[96vw] w-[90vw] mx-auto h-auto bg-gradient-to-br from-purple-50 to-green-50 rounded-2xl shadow-inner border-2 border-gray-300 p-2">
-            {/* Back button */}
+        <div className="md:px-8 w-full">
             <button
                 onClick={handleBack}
-                className="mt-4 flex items-center text-gray-600 hover:text-gray-900 cursor-pointer transition duration-100"
+                className="mt-4 flex items-center text-white hover:text-white cursor-pointer transition duration-100 border-0"
             >
                 <ArrowLeft size={18} className="mr-1" />
                 Back to Search
             </button>
 
-            {/* Main content */}
-            <div className="flex md:flex-row flex-col -mx-4 py-4">
-                {/* Left sidebar */}
-                <div className="md:w-3/8 px-4 md:border-r-2 md:border-r-gray-300 rounded-md flex flex-col justify-between">
-                    <div id="name-ticker" className="">
-                        <div className="text-3xl font-bold mb-4 font-[Orbitron]">
-                            {stockData.ticker}
-                        </div>
-                        <div className="text-5xl font-bold mb-6">
-                            {stockData.ticker}
-                        </div>
-                        <div className="text-gray-500 mb-12">
-                            {stockData.description}
-                        </div>
+            <div id="title" className="mt-4">
+                <h1 className="md:text-8xl text-5xl font-bold">
+                    {currentstockData?.symbol}
+                </h1>
+                <p className="font-light md:text-2xl text-xl text-white mt-3 w-[90%]">
+                    {currentstockData?.exchange || 'NASDAQ'}:{' '}
+                    {currentstockData?.name}
+                </p>
+            </div>
+
+            <div className="flex md:flex-row flex-col py-4 gap-6">
+                <div className="md:w-1/3 w-full flex flex-col justify-between">
+                    <div className="text-gray-700 mb-6">
+                        {currentstockData?.description ||
+                            'A cloud-based web development platform that lets users create and manage websites without coding expertise.'}
                     </div>
-                    <div id="scores">
-                        <div className="text-sm text-gray-600 mb-2">
+
+                    <div id="scores" className="w-full">
+                        <div className="text-lg font-light mb-5">
                             MARKET BENCHMARK SCORES
                         </div>
-                        <div className="text-sm text-gray-600 mb-3">
-                            {stockData.ticker} vs overall market
+                        <div className="text-sm text-gray-100 mb-3">
+                            {currentstockData?.symbol} vs overall market
                         </div>
 
-                        <div className="flex mb-8">
-                            <div className="mr-12 text-center">
-                                <div className="text-3xl font-bold mb-1">
-                                    {stockData.benchmarks.growth}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    GROWTH
-                                </div>
-                            </div>
-                            <div className="mr-12 text-center">
-                                <div className="text-3xl font-bold mb-1">
-                                    {stockData.benchmarks.profit}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    PROFIT
-                                </div>
-                            </div>
-                            <div className="mr-12 text-center">
-                                <div className="text-3xl font-bold mb-1">
-                                    {stockData.benchmarks.value}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    VALUE
-                                </div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-3xl font-bold mb-1">
-                                    {stockData.benchmarks.health}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                    HEALTH
-                                </div>
-                            </div>
+                        <div className="flex flex-wrap gap-5 w-full">
+                            {['growth', 'profit', 'value', 'health'].map(
+                                (metric) => (
+                                    <div
+                                        key={metric}
+                                        className="p-4 rounded-lg w-[45%] backdrop-filter backdrop-blur-lg bg-transparent shadow-lg border border-gray-200"
+                                    >
+                                        <div className="text-3xl font-bold mb-1">
+                                            {currentstockData?.benchmarks?.[
+                                                metric
+                                            ] || 0}
+                                        </div>
+                                        <div className="text-xs text-white">
+                                            {metric.toUpperCase()}
+                                        </div>
+                                    </div>
+                                )
+                            )}
                         </div>
                     </div>
                 </div>
 
-                {/* Right content */}
-                <div className="md:w-4/8 w-full px-4">
+                <div className="md:w-2/3 w-full">
                     <div className="mb-4">
-                        <div className="text-gray-500 mb-1">
-                            {stockData.exchange}: {stockData.ticker}
-                        </div>
                         <div className="text-6xl font-bold mb-1">
-                            ${stockData.currentValue}
+                            {currency}
+                            {currentstockData?.price?.toFixed(2)}
                         </div>
                         <div
                             className={`flex items-center ${changeColor} mb-6`}
                         >
                             <span className="text-xl font-medium">
-                                ${stockData.changeValue} (
-                                {stockData.changePercent}%)
+                                ${currentstockData?.change} (
+                                {currentstockData?.percent_change}%)
                             </span>
                             <span className="ml-2 text-gray-500">
-                                {stockData.timeframe}
+                                {selectedTimeframe}
                             </span>
                         </div>
 
-                        <div className="flex items-center mb-4 gap-4 md:w-auto ">
-                            <button className="bg-white border border-gray-200 text-gray-800 px-4 py-2 rounded-xl flex items-center cursor-pointer hover:scale-110 transition-all duration-200">
+                        <div className="flex items-center mb-4 gap-4">
+                            <button className="bg-black border border-gray-200 text-white px-4 py-2 rounded-lg flex items-center hover:border-black transition duration-300">
                                 <Bookmark size={18} className="mr-2" />
                                 ADD TO LIST
                             </button>
-                            <button className="bg-gray-900 text-white px-4 py-2 rounded-xl cursor-pointer hover:scale-110 transition duration-200">
+                            <button className="bg-black text-white px-4 py-2 rounded-lg flex items-center transition duration-300">
                                 <ShareNetwork size={18} />
                             </button>
                         </div>
 
                         <div className="flex space-x-2 mb-6">
-                            <button
-                                className={`px-4 py-1 rounded-lg text-sm cursor-pointer ${
-                                    selectedTimeframe === '1M'
-                                        ? 'bg-gray-200'
-                                        : 'bg-gray-100'
-                                }`}
-                                onClick={() => setSelectedTimeframe('1M')}
-                            >
-                                1M
-                            </button>
-                            <button
-                                className={`px-4 py-1 rounded-lg text-sm cursor-pointer ${
-                                    selectedTimeframe === '3M'
-                                        ? 'bg-gray-200'
-                                        : 'bg-gray-100'
-                                }`}
-                                onClick={() => setSelectedTimeframe('3M')}
-                            >
-                                3M
-                            </button>
-                            <button
-                                className={`px-4 py-1 rounded-lg text-sm cursor-pointer ${
-                                    selectedTimeframe === '1Y'
-                                        ? 'bg-gray-200'
-                                        : 'bg-gray-100'
-                                }`}
-                                onClick={() => setSelectedTimeframe('1Y')}
-                            >
-                                1Y
-                            </button>
-                            <button
-                                className={`px-4 py-1 rounded-lg text-sm cursor-pointer ${
-                                    selectedTimeframe === '3Y'
-                                        ? 'bg-gray-200'
-                                        : 'bg-gray-100'
-                                }`}
-                                onClick={() => setSelectedTimeframe('3Y')}
-                            >
-                                3Y
-                            </button>
-                            <button
-                                className={`px-4 py-1 rounded-lg text-sm cursor-pointer ${
-                                    selectedTimeframe === 'YTD'
-                                        ? 'bg-gray-200'
-                                        : 'bg-gray-100'
-                                }`}
-                                onClick={() => setSelectedTimeframe('YTD')}
-                            >
-                                YTD
-                            </button>
+                            {['1M', '3M', '1Y', '3Y', 'YTD'].map(
+                                (timeframe) => (
+                                    <button
+                                        key={timeframe}
+                                        className={`px-4 py-1 rounded-lg text-sm cursor-pointer transition duration-200 ${
+                                            selectedTimeframe === timeframe
+                                                ? 'bg-white text-black'
+                                                : 'bg-black hover:bg-gray-300'
+                                        }`}
+                                        onClick={() =>
+                                            setSelectedTimeframe(timeframe)
+                                        }
+                                    >
+                                        {timeframe}
+                                    </button>
+                                )
+                            )}
                         </div>
 
-                        {/* Chart */}
-                        <div className="h-64 mb-8 bg-white bg-opacity-40 rounded-xl p-4">
+                        <div className="h-64 mb-8 bg-gray-200 rounded-lg p-4 shadow-inner">
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={stockData.chartData}>
+                                <LineChart
+                                    data={
+                                        currentstockData?.chartData ||
+                                        generateSampleData()
+                                    }
+                                >
                                     <XAxis
                                         dataKey="month"
                                         axisLine={false}
@@ -285,48 +216,38 @@ const StockCard = ({ initialData = null, fetchData = null }) => {
                                     <Line
                                         type="monotone"
                                         dataKey="value"
-                                        stroke="#4ade80"
-                                        strokeWidth={3}
+                                        stroke="#000"
+                                        strokeWidth={2}
                                         dot={false}
-                                        isAnimationActive={true}
                                     />
                                 </LineChart>
                             </ResponsiveContainer>
                         </div>
 
-                        {/* Company insights */}
-                        <div className="flex space-x-4 mb-6 md:flex-row flex-col md:min-w-auto w-full gap-4">
-                            {stockData.insights.map((insight, index) => (
-                                <div
-                                    key={index}
-                                    className="flex-1 bg-white rounded-xl p-4 shadow-sm w-full"
-                                >
-                                    <div className="flex items-center justify-between mb-4">
-                                        <div className="flex items-center text-gray-500 text-sm">
-                                            <Lightbulb
-                                                size={16}
-                                                className="mr-2"
-                                            />
-                                            COMPANY INSIGHTS
+                        <div>
+                            <h4 className="text-lg font-light mb-5">
+                                COMPANY INSIGHTS
+                            </h4>
+                            <div className="flex flex-wrap gap-5 w-full">
+                                {(currentstockData?.insights || []).map(
+                                    (insight, index) => (
+                                        <div
+                                            key={index}
+                                            className="p-4 rounded-lg flex items-center md:w-[48%] w-full transition duration-300 hover:border-black border-gray-200 backdrop-filter backdrop-blur-lg bg-black shadow-lg border"
+                                        >
+                                            <div className="bg-gray-200 p-2 rounded-lg mr-3">
+                                                <Lightbulb
+                                                    size={20}
+                                                    className="text-gray-700"
+                                                />
+                                            </div>
+                                            <div className="font-medium">
+                                                {insight.title}
+                                            </div>
                                         </div>
-                                        <DotsThreeOutline
-                                            size={16}
-                                            className="text-gray-400"
-                                        />
-                                    </div>
-                                    <div className="flex items-start">
-                                        <div className="bg-yellow-100 p-2 rounded-lg mr-3">
-                                            <Lightbulb
-                                                size={20}
-                                                className="text-yellow-500"
-                                            />
-                                        </div>
-                                        <div className="font-medium">
-                                            {insight.title}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                                    )
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

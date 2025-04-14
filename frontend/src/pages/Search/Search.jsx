@@ -2,23 +2,52 @@ import { MagnifyingGlass } from '@phosphor-icons/react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import stockData from './stocks.json';
-
+import axios from 'axios';
 function Search() {
     const [searchInput, setSearchInput] = useState('');
-    const [filteredData, setFilteredData] = useState(stockData);
+    const [keyword, setKeyword] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
     const navigate = useNavigate();
+    let data;
+
+    const token = import.meta.env.VITE_TEST_TOKEN;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    // console.log(token);
+
+    const fetchData = async (query) => {
+        try {
+            const response = await axios.get(
+                `${backendUrl}search/?keyword=${query}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'ngrok-skip-browser-warning': '69420',
+                    },
+                }
+            );
+            console.log('Fetched Data:', response.data);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching data:', error.message);
+            return [];
+        }
+    };
 
     useEffect(() => {
-        const results = stockData.filter(
-            (stock) =>
-                stock.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-                stock.ticker.toLowerCase().includes(searchInput.toLowerCase())
-        );
-        setFilteredData(results);
+        const getData = async () => {
+            setKeyword(searchInput);
+            const data = await fetchData(searchInput);
+            setFilteredData(data);
+            console.log('Filtered Data:', data);
+        };
+
+        if (searchInput.trim() !== '') {
+            getData();
+        }
     }, [searchInput]);
 
     const handleStockClick = (stock) => {
-        navigate(`/stock/${stock.ticker}`);
+        navigate(`/stock/${stock.currency}/${stock.symbol}`);
     };
 
     return (
@@ -50,28 +79,29 @@ function Search() {
                     </h4>
                     <div>
                         {filteredData.length > 0 ? (
-                            <div className="flex flex-row flex-wrap gap-5 w-full py-2">
+                            <div className="flex flex-row flex-wrap gap-5 w-full py-2 bg-transparent">
                                 {filteredData.map((stock) => (
                                     <div
-                                        key={stock.ticker}
-                                        className="p-4 rounded-lg flex items-center md:w-[22%] w-full transition duration-300 cursor-pointer hover:border-black border-gray-200 ease-in-out 
-                                               backdrop-filter backdrop-blur-lg bg-white/50 shadow-lg border"
+                                        key={stock.symbol}
+                                        className="p-4 rounded-lg flex items-center md:w-[22%] w-full transition-all duration-200 cursor-pointer hover:border-black hover:bg-white hover:text-black border-gray-200 ease-in-out 
+                                               backdrop-filter backdrop-blur-lg bg-black shadow-lg border bg-transparent"
                                         onClick={() => handleStockClick(stock)}
                                     >
-                                        <img
+                                        {/* <img
                                             src={stock.logo_url}
                                             alt={stock.name}
                                             className="w-12 h-12 mr-4 rounded-full"
-                                        />
+                                        /> */}
                                         <div>
                                             <h2 className="text-lg font-semibold">
-                                                {stock.name} ({stock.ticker})
+                                                {stock.name} ({stock.symbol})
                                             </h2>
                                             <p className="text-gray-600">
                                                 {stock.exchange} - {stock.index}
                                             </p>
                                             <p className="text-gray-700 font-bold">
-                                                ${stock.current_price}
+                                                {stock.currency}
+                                                {stock.current_price}
                                             </p>
                                         </div>
                                     </div>
