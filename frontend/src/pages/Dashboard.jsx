@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {
     Area,
@@ -18,6 +18,9 @@ import {
     YAxis,
 } from 'recharts';
 import './Dashboard.css';
+import { Power } from '@phosphor-icons/react';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 // Sample data for charts
 const profitLossData = [
@@ -162,9 +165,45 @@ const adviceData = [
 function Dashboard() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [activeTab, setActiveTab] = useState('overview');
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        toast.success('Logout Successful!', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+        });
+        navigate('/');
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            navigate('/signup');
+        }
+    });
 
     return (
         <div className="flex min-h-screen bg-black border-2">
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                // transition={Bounce}
+            />
             {/* Sidebar */}
 
             {/* Main Content */}
@@ -288,6 +327,12 @@ function Dashboard() {
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                                 />
                             </svg>
+                        </button>
+                        <button
+                            className="rounded-md border border-gray-300 p-1.5 text-gray-700 hover:bg-gray-50"
+                            onClick={handleLogout}
+                        >
+                            <Power />
                         </button>
                     </div>
                 </header>

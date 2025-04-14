@@ -106,6 +106,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
+    ChartLine,
     ClockCounterClockwise,
     List,
     MagnifyingGlass,
@@ -113,25 +114,36 @@ import {
 } from '@phosphor-icons/react';
 import { useState } from 'react';
 import './Navbar.css';
+import useBackend from '../../utils/useBackend';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const location = useLocation();
+    const [localToken, setLocalToken] = useState();
+    // const navigate = useNavigate();
     let Links = [
         { name: 'HOME', link: '/' },
-        { name: 'PORTFOLIO', link: '' },
+        { name: 'PORTFOLIO', link: '/portfolio' },
         { name: 'WATCHLIST', link: '/watchlist' },
-        { name: 'DISCOVER', link: '' },
+        { name: 'DISCOVER', link: '/discover' },
     ];
 
     useEffect(() => {
         setIsOpen(false);
-    }, [location]);
+        const token = localStorage.getItem('access_token');
+        // console.log(token);
+
+        setLocalToken(token);
+        // console.log(localToken);
+    }, [navigate, localToken]);
+
+    // useEffect(() => {});
 
     const handleSearch = () => {
         navigate('/search');
     };
+
+    // console.log(token);
 
     return (
         <div className="md:mx-auto md:w-auto w-full md:px-8 z-50 pt-3 navbar">
@@ -142,7 +154,7 @@ const Navbar = () => {
                         id="linkList"
                         className={`flex gap-6 md:items-center md:justify-evenly md:pb-0 absolute md:static md:z-auto z-40 left-0 md:w-auto md:pl-0 transition-all duration-500 ease-in ${
                             isOpen
-                                ? 'top-20 p-2 w-[92%] flex-col shadow-inner rounded-xl z-[999] ml-4 backdrop-blur-3xl0'
+                                ? 'top-12 p-2 w-[92%] flex-col shadow-inner rounded-xl z-[999] ml-4 backdrop-blur-3xl border-4 border-white'
                                 : 'top-[-490px] flex items-center'
                         }`}
                     >
@@ -189,8 +201,16 @@ const Navbar = () => {
                             className="md:block hidden"
                         />
                     </div>
-                    <NavLink to="/signup" id="profile" className="px-2">
-                        <User size={24} />
+                    <NavLink
+                        to={localToken ? '/dashboard' : '/signup'}
+                        id="profile"
+                        className="px-2"
+                    >
+                        {localToken ? (
+                            <ChartLine size={24} />
+                        ) : (
+                            <User size={24} />
+                        )}
                     </NavLink>
                 </div>
             </div>

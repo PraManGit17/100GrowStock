@@ -10,8 +10,9 @@ function Search() {
     const navigate = useNavigate();
     let data;
 
-    const token = import.meta.env.VITE_TEST_TOKEN;
+    // const token = import.meta.env.VITE_TEST_TOKEN;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const token = localStorage.getItem('access_token');
     // console.log(token);
 
     const fetchData = async (query) => {
