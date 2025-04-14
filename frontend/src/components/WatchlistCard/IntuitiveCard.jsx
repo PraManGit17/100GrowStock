@@ -40,14 +40,14 @@ const IntuitiveCard = ({
         }
     }, []);
 
-    const chartColor = isPositive ? '#4ade80' : '#ef4444';
-    const gradientColor = isPositive ? 'from-green-100' : 'from-red-100';
+    const chartColor = isPositive ? 'white' : '#ef4444';
+    const gradientColor = isPositive ? 'from-white' : 'from-red-100';
     const changeColor = isPositive ? 'text-green-500' : 'text-red-500';
     const arrowIcon = isPositive ? '↗' : '↘';
 
     return (
         <div
-            className="md:w-64 w-screen bg-white rounded-xl shadow-inner p-5 relative"
+            className="md:w-64 w-screen bg-black rounded-xl shadow-inner p-5 relative border-2 border-white"
             style={{ fontFamily: 'Inter, sans-serif' }}
         >
             <div className="absolute top-4 right-4">

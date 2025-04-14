@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import IntuitiveCard from '../../components/WatchlistCard/IntuitiveCard';
+import useBackend from '../../utils/useBackend';
+import { useNavigate } from 'react-router-dom';
 
 function Watchlist() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        // console.log(token);
+        if (!token) {
+            navigate('/signup');
+        }
+    }, [navigate]);
     return (
         <>
             <div className="md:px-8 w-full">
