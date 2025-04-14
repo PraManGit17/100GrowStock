@@ -6,8 +6,9 @@ import axios from 'axios';
 function Search() {
     const [searchInput, setSearchInput] = useState('');
     const [keyword, setKeyword] = useState('');
-    const [filteredData, setFilteredData] = useState(stockData);
+    const [filteredData, setFilteredData] = useState([]);
     const navigate = useNavigate();
+    let data;
 
     const token = import.meta.env.VITE_TEST_TOKEN;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -16,7 +17,7 @@ function Search() {
     const fetchData = async (query) => {
         try {
             const response = await axios.get(
-                `${backendUrl}/search/?keyword=${query}`,
+                `${backendUrl}search/?keyword=${query}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -24,27 +25,29 @@ function Search() {
                     },
                 }
             );
-            console.log(response.data);
+            console.log('Fetched Data:', response.data);
+            return response.data;
         } catch (error) {
             console.error('Error fetching data:', error.message);
+            return [];
         }
     };
 
     useEffect(() => {
-        // const results = stockData.filter(
-        //     (stock) =>
-        //         stock.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-        //         stock.ticker.toLowerCase().includes(searchInput.toLowerCase())
-        // );
-        // setFilteredData(results);
-        setKeyword(searchInput);
-        console.log(keyword);
-        let data = fetchData(keyword);
-        console.log(data);
+        const getData = async () => {
+            setKeyword(searchInput);
+            const data = await fetchData(searchInput);
+            setFilteredData(data);
+            console.log('Filtered Data:', data);
+        };
+
+        if (searchInput.trim() !== '') {
+            getData();
+        }
     }, [searchInput]);
 
     const handleStockClick = (stock) => {
-        navigate(`/stock/${stock.ticker}`);
+        navigate(`/stock/${stock.currency}/${stock.symbol}`);
     };
 
     return (
@@ -76,22 +79,22 @@ function Search() {
                     </h4>
                     <div>
                         {filteredData.length > 0 ? (
-                            <div className="flex flex-row flex-wrap gap-5 w-full py-2">
+                            <div className="flex flex-row flex-wrap gap-5 w-full py-2 bg-transparent">
                                 {filteredData.map((stock) => (
                                     <div
-                                        key={stock.ticker}
+                                        key={stock.symbol}
                                         className="p-4 rounded-lg flex items-center md:w-[22%] w-full transition duration-300 cursor-pointer hover:border-black border-gray-200 ease-in-out 
-                                               backdrop-filter backdrop-blur-lg bg-white/50 shadow-lg border"
+                                               backdrop-filter backdrop-blur-lg bg-white/50 shadow-lg border bg-transparents"
                                         onClick={() => handleStockClick(stock)}
                                     >
-                                        <img
+                                        {/* <img
                                             src={stock.logo_url}
                                             alt={stock.name}
                                             className="w-12 h-12 mr-4 rounded-full"
-                                        />
+                                        /> */}
                                         <div>
                                             <h2 className="text-lg font-semibold">
-                                                {stock.name} ({stock.ticker})
+                                                {stock.name} ({stock.symbol})
                                             </h2>
                                             <p className="text-gray-600">
                                                 {stock.exchange} - {stock.index}

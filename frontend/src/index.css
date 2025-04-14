@@ -1,16 +1,11 @@
 @import 'tailwindcss';
 
-
-html,body{
+html,
+body {
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
     box-sizing: border-box;
 }
-
-
- 
-
-
 
 #linkList {
     font-family: 'Inter', Courier, monospace;
@@ -19,5 +14,3 @@ html,body{
 #title {
     font-family: 'Inter', Courier, monospace;
 }
-
-
