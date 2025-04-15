@@ -18,6 +18,7 @@ import StockCard from './components/StockCard/StockCard.jsx';
 import Home from './pages/Home/Home.jsx';
 import Portfolio from './pages/Portfolio/Portfolio.jsx';
 import Discover from './pages/Discover/Discover.jsx';
+import TaxPlanning from './pages/TaxPlanning.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
                     element={<StockCard />}
                 />
                 <Route path="/discover" element={<Discover />} />
+                <Route path="/tax-planning" element={<TaxPlanning />} />
             </Route>
             <Route path="/Home" element={<Home />} />
         </Route>

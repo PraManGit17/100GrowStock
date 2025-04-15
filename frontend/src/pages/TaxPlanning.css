@@ -1,0 +1,406 @@
+/* TaxPlanning.css */
+
+.tax-planning-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(0, 0, 0, 0.3)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.tax-planning-container:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(0, 0, 0, 0.4)
+    );
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.4),
+        0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.description {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(
+        135deg,
+        rgba(144, 139, 139, 0.678),
+        rgba(62, 62, 62, 0.388)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    font-size: 16px;
+    color: white;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: border 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.input-field:focus {
+    border-color: rgba(255, 255, 255, 0.9);
+    outline: none;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+.calculate-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15),
+        rgba(0, 0, 0, 0.25)
+    );
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.calculate-button:hover {
+    background: rgb(245, 244, 244);
+    border-color: white;
+    box-shadow: 0 0 10px rgba(215, 214, 214, 0.768);
+    color: black;
+    transform: scale(1.05);
+}
+
+.results {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgb(255, 254, 254);
+    border-radius: 8px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.results h2 {
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+}
+
+.results p {
+    margin: 8px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+}
+
+.tax-regime-toggle {
+    display: flex;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.regime-option {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.regime-option.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: bold;
+}
+
+.regime-option:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.deduction-list {
+    margin-bottom: 20px;
+}
+
+.deduction-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.deduction-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.investment-tips {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+}
+
+.investment-tips h3 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.investment-tips ul {
+    padding-left: 20px;
+}
+
+.investment-tips li {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 8px;
+}
+
+/* GenAI TaxGPT Styling */
+.genai-advisor {
+    margin-top: 30px;
+    padding: 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(102, 51, 153, 0.2),
+        rgba(69, 179, 224, 0.2)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(102, 51, 153, 0.2), 
+                0 4px 12px rgba(69, 179, 224, 0.2);
+}
+
+.genai-advisor h2 {
+    color: white;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(102, 51, 153, 0.5);
+}
+
+.genai-description {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 20px;
+}
+
+.ai-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.ai-loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.ai-loading p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.ai-response {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.ai-response-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.ai-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgb(102, 51, 153),
+        rgb(69, 179, 224)
+    );
+    margin-right: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-icon:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: translate(-50%, -50%);
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='1 4 1 10 7 10'%3E%3C/polyline%3E%3Cpath d='M3.51 15a9 9 0 1 0 2.13-9.36L1 10'%3E%3C/path%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+.ai-response-header h3 {
+    color: white;
+    font-weight: bold;
+}
+
+.ai-response p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+.ai-query {
+    display: flex;
+    gap: 10px;
+}
+
+.ai-query-button {
+    padding: 12px 20px;
+    background: linear-gradient(
+        135deg,
+        rgb(102, 51, 153, 0.7),
+        rgb(69, 179, 224, 0.7)
+    );
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-weight: bold;
+}
+
+.ai-query-button:hover {
+    background: linear-gradient(
+        135deg,
+        rgb(102, 51, 153),
+        rgb(69, 179, 224)
+    );
+    box-shadow: 0 0 15px rgba(102, 51, 153, 0.5), 
+                0 0 15px rgba(69, 179, 224, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Gemini API Key Input Styling */
+.api-key-input {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+}
+
+.api-key-input label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.api-key-field {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.api-key-button {
+    padding: 12px 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(102, 51, 153, 0.7),
+        rgba(69, 179, 224, 0.7)
+    );
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.api-key-button:hover {
+    background: linear-gradient(
+        135deg,
+        rgb(102, 51, 153),
+        rgb(69, 179, 224)
+    );
+    box-shadow: 0 0 15px rgba(102, 51, 153, 0.5), 
+                0 0 15px rgba(69, 179, 224, 0.5);
+    transform: translateY(-2px);
+}
+
+.api-key-info {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-top: 5px;
+}
+
+.api-key-info a {
+    color: rgb(69, 179, 224);
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.api-key-info a:hover {
+    color: rgb(102, 51, 153);
+    text-shadow: 0 0 5px rgba(102, 51, 153, 0.5);
+}

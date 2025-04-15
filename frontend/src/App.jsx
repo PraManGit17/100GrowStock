@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import Landing from './pages/Landing/Landing';
 import Navbar from './components/Navbar/Navbar';
 import { Outlet, useNavigate } from 'react-router-dom';
+import StockChatbot from './components/StockChatbot/StockChatbot';
 
 // import Orb from "./components/Orb/Orb.jsx"
 // import Dashboard from './pages/Dashboard';
@@ -22,6 +23,7 @@ function App() {
                 {/* <Navbar /> */}
                 <Outlet />
                 {/* <Dashboard/>  */}
+                <StockChatbot />
             </div>
             {/* </div> */}
         </>

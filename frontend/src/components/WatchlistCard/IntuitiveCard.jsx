@@ -10,6 +10,7 @@ const IntuitiveCard = ({
     currentValue = 512.78,
     percentageChange = 84.9,
     timeframe = 'PAST YEAR',
+    onClick = null
 }) => {
     const [chartData, setChartData] = useState([]);
     const [isPositive, setIsPositive] = useState(true);
@@ -38,17 +39,24 @@ const IntuitiveCard = ({
             ]);
             setIsPositive(true);
         }
-    }, []);
+    }, [stockData, percentageChange]);
 
     const chartColor = isPositive ? 'white' : '#ef4444';
     const gradientColor = isPositive ? 'from-white' : 'from-red-100';
     const changeColor = isPositive ? 'text-green-500' : 'text-red-500';
     const arrowIcon = isPositive ? '↗' : '↘';
 
+    const handleCardClick = () => {
+        if (onClick) {
+            onClick();
+        }
+    };
+
     return (
         <div
-            className="md:w-64 w-screen bg-black rounded-xl shadow-inner p-5 relative border-2 border-white"
+            className="md:w-64 w-screen bg-black rounded-xl shadow-inner p-5 relative border-2 border-white cursor-pointer transform transition-transform hover:scale-105"
             style={{ fontFamily: 'Inter, sans-serif' }}
+            onClick={handleCardClick}
         >
             <div className="absolute top-4 right-4">
                 <Bookmark size={18} fill="black" color="black" />
