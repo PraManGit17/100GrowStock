@@ -19,7 +19,7 @@ const Navbar = () => {
 
     let Links = [
         { name: 'HOME', link: '/' },
-        { name: 'PORTFOLIO', link: '/dashboard' },
+        { name: 'PORTFOLIO', link: '/portfolio' },
         { name: 'WATCHLIST', link: '/watchlist' },
         { name: 'DISCOVER', link: '/discover' },
         { name: 'TAX PLANNING', link: '/tax-planning' },
