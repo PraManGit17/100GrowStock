@@ -49,7 +49,7 @@ export default function Login() {
             localStorage.setItem('refresh_token', data.refresh);
 
             // Redirect to dashboard
-            navigate('/dashboard');
+            navigate('/portfolio');
         } catch (error) {
             console.error('Login error:', error);
             setError(error.message || 'An error occurred during login');

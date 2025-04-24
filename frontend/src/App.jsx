@@ -12,14 +12,16 @@ function App() {
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         setLocalToken(token);
-        console.log(`Token: ${token}\nLocalToken:${localToken}`);
+        // console.log(`Token: ${token}\nLocalToken:${localToken}`);
+        // window.location.reload();
     }, [navigate, localToken]);
+
     return (
         <>
             {/* <div className="px-4 backdrop-filter backdrop-blur-lg bg-opacity-30 border-4 shadow-inner border-gray-200 w-[95vw] md:mx-auto ml-2 rounded-xl overflow-x-hidden h-screen md:w-auto"> */}
             <div className="md:px-0 px-4 bg-black">
                 {/* <Orb /> */}
-                {localToken != null ? <Navbar /> : ''}
+                {localToken && <Navbar />}
                 {/* <Navbar /> */}
                 <Outlet />
                 {/* <Dashboard/>  */}

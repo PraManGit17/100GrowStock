@@ -6,7 +6,7 @@ import {
     List,
     MagnifyingGlass,
     User,
-    Calculator, 
+    Calculator,
 } from '@phosphor-icons/react';
 import { useState } from 'react';
 import './Navbar.css';
@@ -16,13 +16,13 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [localToken, setLocalToken] = useState();
-    
+
     let Links = [
         { name: 'HOME', link: '/' },
         { name: 'PORTFOLIO', link: '/portfolio' },
         { name: 'WATCHLIST', link: '/watchlist' },
         { name: 'DISCOVER', link: '/discover' },
-        { name: 'TAX PLANNING', link: '/tax-planning' }, 
+        { name: 'TAX PLANNING', link: '/tax-planning' },
     ];
 
     useEffect(() => {
@@ -94,7 +94,7 @@ const Navbar = () => {
                         />
                     </div>
                     <NavLink
-                        to={localToken ? '/dashboard' : '/signup'}
+                        to={localToken ? '/portfolio' : '/signup'}
                         id="profile"
                         className="px-2"
                     >

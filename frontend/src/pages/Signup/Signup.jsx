@@ -104,7 +104,7 @@ export default function Signup() {
                 draggable: true,
                 progress: undefined,
                 theme: 'light',
-                transition: Bounce,
+                // transition: Bounce,
             });
             navigate('/login');
         } catch (error) {
