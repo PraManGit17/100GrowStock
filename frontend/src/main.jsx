@@ -16,7 +16,7 @@ import Login from './pages/login.jsx/Login.jsx';
 import Search from './pages/Search/Search.jsx';
 import StockCard from './components/StockCard/StockCard.jsx';
 import Home from './pages/Home/Home.jsx';
-import Portfolio from './pages/Portfolio/Portfolio.jsx';
+// import Dashboard from './pages/dashboard/dashboard.jsx';
 import Discover from './pages/Discover/Discover.jsx';
 import TaxPlanning from './pages/TaxPlanning.jsx';
 
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />
-                <Route path="/portfolio" element={<Dashboard />} />
+                {/* <Route path="/dashboard" element={<Portfolio />} /> */}
                 <Route
                     path="/stock/:currency/:stockId"
                     element={<StockCard />}
@@ -44,7 +44,7 @@ const router = createBrowserRouter(
 );
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
-        <RouterProvider router={router} />
-    </StrictMode>
+    // <StrictMode>
+    <RouterProvider router={router} />
+    // {/* </StrictMode> */}
 );

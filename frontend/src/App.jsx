@@ -5,7 +5,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import StockChatbot from './components/StockChatbot/StockChatbot';
 
 // import Orb from "./components/Orb/Orb.jsx"
-// import Dashboard from './pages/Dashboard';
+// import Dashboard from './pages/portfolio';
 function App() {
     const navigate = useNavigate();
     const [localToken, setLocalToken] = useState();
