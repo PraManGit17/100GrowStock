@@ -39,6 +39,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        navigate('/');
         window.location.reload();
     };
 
@@ -97,7 +98,7 @@ const Navbar = () => {
                         />
                         <Power
                             size={24}
-                            className="md:block hidden"
+                            className="md:block "
                             onClick={handleLogout}
                         />
                     </div>

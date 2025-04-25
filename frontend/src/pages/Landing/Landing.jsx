@@ -242,6 +242,7 @@ export default function LandingPage() {
     const { scrollYProgress } = useScroll();
     const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
     const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+    const token = localStorage.getItem('access_token');
 
     useEffect(() => {
         setIsLoaded(true);
@@ -504,10 +505,10 @@ export default function LandingPage() {
                                         }}
                                     />
                                     <a
-                                        href="/signup"
+                                        href={token ? '/portfolio' : '/signup'}
                                         className="relative bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-lg text-lg font-medium inline-flex items-center"
                                     >
-                                        Get Started
+                                        {token ? 'Portfolio' : 'Get Started'}
                                         <motion.div
                                             animate={{
                                                 x: [0, 5, 0],
@@ -1107,10 +1108,10 @@ export default function LandingPage() {
                                 }}
                             />
                             <a
-                                href="/signup"
+                                href={token ? '/portfolio' : '/signup'}
                                 className="relative bg-white text-black hover:bg-gray-200 px-8 py-4 rounded-lg text-lg font-medium inline-flex items-center"
                             >
-                                Get Started Now
+                                {token ? 'Portfolio' : 'Get Started Now'}
                                 <motion.div
                                     animate={{
                                         x: [0, 5, 0],

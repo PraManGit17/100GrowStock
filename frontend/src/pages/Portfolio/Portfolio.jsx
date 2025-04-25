@@ -453,7 +453,7 @@ function Portfolio() {
 
                 <div
                     ref={topInvestmentsRef}
-                    className="bg-black h-5/6 w-[30%] border-2 border-white rounded-2xl p-4 mt-10"
+                    className="bg-black w-[30%] border-2 border-white rounded-2xl p-4 mt-10 h-fit overflow-y-auto"
                 >
                     <div className="px-4 flex flex-col">
                         <div className="py-3 text-3xl font-bold text-left text-white">
