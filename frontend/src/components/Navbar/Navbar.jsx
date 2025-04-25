@@ -95,17 +95,18 @@ const Navbar = () => {
                             onClick={() => {
                                 handleSearch();
                             }}
+                            className="hover:scale-125"
                         />
                         <Power
                             size={24}
-                            className="md:block "
+                            className="md:block hover:scale-125"
                             onClick={handleLogout}
                         />
                     </div>
                     <NavLink
                         to={localToken ? '/portfolio' : '/signup'}
                         id="profile"
-                        className="px-2"
+                        className="px-2 hover:scale-125"
                     >
                         {localToken ? (
                             <ChartLine size={24} />
