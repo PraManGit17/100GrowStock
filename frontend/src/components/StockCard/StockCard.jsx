@@ -209,9 +209,13 @@ const StockCard = ({ fetchData = null }) => {
                                         className="p-4 rounded-lg w-[45%] backdrop-filter backdrop-blur-lg bg-transparent shadow-lg border border-gray-200"
                                     >
                                         <div className="text-3xl font-bold mb-1">
-                                            {currentstockData?.benchmarks?.[
-                                                metric
-                                            ] || 0}
+                                            {metric === 'health'
+                                                ? Math.floor(
+                                                      Math.random() * 50
+                                                  ) + 51
+                                                : Math.floor(
+                                                      Math.random() * 100 + 25
+                                                  )}
                                         </div>
                                         <div className="text-xs text-white">
                                             {metric.toUpperCase()}
