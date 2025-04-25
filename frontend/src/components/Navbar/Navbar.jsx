@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 import './Navbar.css';
 import useBackend from '../../utils/useBackend';
+import { Power } from 'lucide-react';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -33,6 +34,12 @@ const Navbar = () => {
 
     const handleSearch = () => {
         navigate('/search');
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        window.location.reload();
     };
 
     return (
@@ -88,9 +95,10 @@ const Navbar = () => {
                                 handleSearch();
                             }}
                         />
-                        <ClockCounterClockwise
+                        <Power
                             size={24}
                             className="md:block hidden"
+                            onClick={handleLogout}
                         />
                     </div>
                     <NavLink

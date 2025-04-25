@@ -19,6 +19,7 @@ import Home from './pages/Home/Home.jsx';
 // import Dashboard from './pages/dashboard/dashboard.jsx';
 import Discover from './pages/Discover/Discover.jsx';
 import TaxPlanning from './pages/TaxPlanning.jsx';
+import Portfolio from './pages/Portfolio/Portfolio.jsx';
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
             <Route path="/" element={<App />}>
                 <Route path="" element={<Landing />} />
                 <Route path="/watchlist" element={<Watchlist />} />
-                <Route path="/portfolio" element={<Dashboard />} />
+                <Route path="/portfolio" element={<Portfolio />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/search" element={<Search />} />

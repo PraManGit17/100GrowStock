@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import stockData from './stocks.json';
 import axios from 'axios';
+import { ArrowFatLineDown } from '@phosphor-icons/react/dist/ssr';
 function Search() {
     const [searchInput, setSearchInput] = useState('');
     const [keyword, setKeyword] = useState('');
@@ -15,8 +16,15 @@ function Search() {
     const token = localStorage.getItem('access_token');
     // console.log(token);
 
+    const handleSearch = async () => {
+        const data = await fetchData(searchInput);
+        setFilteredData(data);
+        console.log(filteredData);
+    };
+
     const fetchData = async (query) => {
         try {
+            setTimeout(() => {}, 1000);
             const response = await axios.get(
                 `${backendUrl}search/?keyword=${query}`,
                 {
@@ -26,7 +34,7 @@ function Search() {
                     },
                 }
             );
-            console.log('Fetched Data:', response.data);
+            // console.log('Fetched Data:', response.data);
             return response.data;
         } catch (error) {
             console.error('Error fetching data:', error.message);
@@ -35,16 +43,18 @@ function Search() {
     };
 
     useEffect(() => {
-        const getData = async () => {
-            setKeyword(searchInput);
-            const data = await fetchData(searchInput);
-            setFilteredData(data);
-            console.log('Filtered Data:', data);
-        };
+        // const getData = async () => {
+        //     setKeyword(searchInput);
+        //     // const data = await fetchData(searchInput);
+        //     // setFilteredData(data);
+        //     // console.log('Filtered Data:', data);
+        // };
+        setKeyword(searchInput);
 
-        if (searchInput.trim() !== '') {
-            getData();
-        }
+        // if (searchInput.trim() !== '') {
+        //     // getData();
+        // }
+        // console.log(searchInput);
     }, [searchInput]);
 
     const handleStockClick = (stock) => {
@@ -64,7 +74,11 @@ function Search() {
                     id="search-box"
                     className="flex flex-row bg-gray-200 rounded-lg p-2 gap-2 mt-4"
                 >
-                    <MagnifyingGlass size={24} className="text-gray-500" />
+                    <MagnifyingGlass
+                        size={24}
+                        className="text-black cursor-pointer hover:scale-110"
+                        onClick={handleSearch}
+                    />
                     <input
                         type="text"
                         id="searchInput"
@@ -85,7 +99,7 @@ function Search() {
                                     <div
                                         key={stock.symbol}
                                         className="p-4 rounded-lg flex items-center md:w-[22%] w-full transition-all duration-200 cursor-pointer hover:border-black hover:bg-white hover:text-black border-gray-200 ease-in-out 
-                                               backdrop-filter backdrop-blur-lg bg-black shadow-lg border bg-transparent"
+                                               backdrop-filter backdrop-blur-lg bg-black shadow-lg border "
                                         onClick={() => handleStockClick(stock)}
                                     >
                                         {/* <img

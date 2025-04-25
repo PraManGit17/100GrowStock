@@ -14,13 +14,18 @@ import useBackend from '../../utils/useBackend';
 const StockCard = ({ fetchData = null }) => {
     const [currentstockData, setCurrentStockData] = useState(null);
     const [addingToWatchlist, setAddingToWatchlist] = useState(false);
-    const [notification, setNotification] = useState({ show: false, message: '', type: '' });
+    const [notification, setNotification] = useState({
+        show: false,
+        message: '',
+        type: '',
+    });
     const { stockId } = useParams();
     const { currency } = useParams();
     const navigate = useNavigate();
     const backend = useBackend;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const token = import.meta.env.VITE_TEST_TOKEN;
+    const token = localStorage.getItem('access_token');
+    // console.log(token);
 
     const fetchStockData = async (symbol) => {
         try {
@@ -89,57 +94,58 @@ const StockCard = ({ fetchData = null }) => {
 
     const addToWatchlist = async () => {
         if (!currentstockData) return;
-        
+
         setAddingToWatchlist(true);
-        
+
         try {
             const token = localStorage.getItem('access_token');
             if (!token) {
                 navigate('/login');
                 return;
             }
-            
+
             const payload = {
                 symbol: currentstockData.symbol,
-                name: currentstockData.name
+                name: currentstockData.name,
             };
-            
+
             const response = await fetch(`${backend.backendUrl}watchlist/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
             });
-            
+
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to add to watchlist');
+                throw new Error(
+                    errorData.message || 'Failed to add to watchlist'
+                );
             }
-            
+
             // Show success notification
-            setNotification({ 
-                show: true, 
-                message: `${currentstockData.name} added to watchlist`, 
-                type: 'success' 
+            setNotification({
+                show: true,
+                message: `${currentstockData.name} added to watchlist`,
+                type: 'success',
             });
-            
+
             // Hide notification after 3 seconds
             setTimeout(() => {
                 setNotification({ show: false, message: '', type: '' });
             }, 3000);
-            
         } catch (error) {
             console.error('Error adding to watchlist:', error);
-            
+
             // Show error notification
-            setNotification({ 
-                show: true, 
-                message: error.message || 'Failed to add to watchlist', 
-                type: 'error' 
+            setNotification({
+                show: true,
+                message: error.message || 'Failed to add to watchlist',
+                type: 'error',
             });
-            
+
             // Hide notification after 3 seconds
             setTimeout(() => {
                 setNotification({ show: false, message: '', type: '' });
@@ -237,13 +243,15 @@ const StockCard = ({ fetchData = null }) => {
                         </div>
 
                         <div className="flex items-center mb-4 gap-4">
-                            <button 
+                            <button
                                 className="bg-black border border-gray-200 text-white px-4 py-2 rounded-lg flex items-center hover:border-black transition duration-300"
                                 onClick={addToWatchlist}
                                 disabled={addingToWatchlist}
                             >
                                 <Bookmark size={18} className="mr-2" />
-                                {addingToWatchlist ? 'ADDING...' : 'ADD TO WATCHLIST'}
+                                {addingToWatchlist
+                                    ? 'ADDING...'
+                                    : 'ADD TO WATCHLIST'}
                             </button>
                             <button className="bg-black text-white px-4 py-2 rounded-lg flex items-center transition duration-300">
                                 <ShareNetwork size={18} />
@@ -323,7 +331,7 @@ const StockCard = ({ fetchData = null }) => {
                     </div>
                 </div>
             </div>
-            
+
             {/* Notification */}
             {notification.show && (
                 <div className={`notification ${notification.type}`}>
